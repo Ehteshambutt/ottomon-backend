@@ -2,15 +2,15 @@
 const db = require('../DBConfig/dbConfig');
 
 exports.createProduct = (req, res) => {
-  const { name, description, price, image_url, discount, discount_price, category_id, subcategory_id, nested_subcategory_id } = req.body;
-  const sql = 'INSERT INTO products (name, description, price, image_url, discount, discount_price, category_id, subcategory_id, nested_subcategory_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
-  db.query(sql, [name, description, price, image_url, discount, discount_price, category_id, subcategory_id, nested_subcategory_id], (err, result) => {
+  const sql = 'INSERT INTO products (name,description, price, image_url, discount, discount_price, category_id, subcategory_id, nested_subcategory_id) VALUES (?,?,?,?,?,?,?,?,?)';
+  db.query(sql, [name, description, price, image_url, discount, discount_price, categoryId, subcategoryId, nestedSubcategoryId], (err, result) => {
     if (err) {
       res.status(500).json({ error: err.message });
     } else {
       res.status(201).json({ message: 'Product created successfully', productId: result.insertId });
     }
   });
+  
 };
 
 exports.getAllProducts = (req, res) => {

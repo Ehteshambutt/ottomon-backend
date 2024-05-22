@@ -1,6 +1,6 @@
 const db = require('../DBConfig/dbConfig');
 const multer = require('multer');
-const path = require('path'); // Import the path module
+const path = require('path');
 
 // Set up multer storage
 const storage = multer.diskStorage({
@@ -11,7 +11,6 @@ const storage = multer.diskStorage({
     cb(null, `${Date.now()}_${path.basename(file.originalname)}`); // Unique filename
   },
 });
-
 
 const upload = multer({ storage: storage });
 
@@ -25,11 +24,11 @@ exports.getAllCategories = (req, res) => {
 
 // Create a new category with image upload
 exports.createCategory = (req, res) => {
-  const { name } = req.body;
+  const { name, created_date } = req.body;
   const imagePath = req.file ? req.file.path : null; // Get uploaded image path
   db.query(
-    'INSERT INTO categories (name, image_path) VALUES (?, ?)',
-    [name, imagePath],
+    'INSERT INTO categories (name, image_path, created_date) VALUES (?, ?, ?)',
+    [name, imagePath, created_date],
     (err, result) => {
       if (err) throw err;
       res.status(201).send('Category created successfully');
@@ -40,19 +39,24 @@ exports.createCategory = (req, res) => {
 // Update a category by ID with optional image upload
 exports.updateCategory = (req, res) => {
   const categoryId = req.params.id;
-  const { name } = req.body;
+  const { name, created_date } = req.body;
   const imagePath = req.file ? req.file.path : null; // Get uploaded image path
-  const updateValues = [name];
-  if (imagePath) updateValues.push(imagePath);
 
-  db.query(
-    'UPDATE categories SET name = ?, image_path = ? WHERE id = ?',
-    [...updateValues, categoryId],
-    (err, result) => {
-      if (err) throw err;
-      res.send('Category updated successfully');
-    }
-  );
+  let query = 'UPDATE categories SET name = ?, created_date = ?';
+  const updateValues = [name, created_date];
+
+  if (imagePath) {
+    query += ', image_path = ?';
+    updateValues.push(imagePath);
+  }
+
+  query += ' WHERE id = ?';
+  updateValues.push(categoryId);
+
+  db.query(query, updateValues, (err, result) => {
+    if (err) throw err;
+    res.send('Category updated successfully');
+  });
 };
 
 // Delete a category by ID
