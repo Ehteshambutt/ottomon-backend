@@ -24,7 +24,7 @@ exports.getAllBeds = (req, res) => {
     res.json(results);
   });
 };
-
+ 
 exports.getBedById = (req, res) => {
   const sql = 'SELECT * FROM Beds WHERE id = ?';
   db.query(sql, [req.params.id], (err, result) => {
