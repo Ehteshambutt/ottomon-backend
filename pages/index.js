@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const { swaggerUi, specs } = require('./swagger');
+const { swaggerUi, specs } = require('../swagger');
  const productRoutes=require('../Routes/productRoutes')
 const categories = require('../Routes/categoryRoutes');
 const subcategories = require('../Routes/subcategoryRoutes');
@@ -10,7 +10,7 @@ const nestedsubcategories = require('../Routes/nestedsubcategoryRoutes');
 const login = require('../Routes/loginRoutes');
 const matressRoutes = require('../Routes/matressRoutes');
 const bedsRoutes = require('../Routes/bedsRoutes');
-const accessoriesRoutes = require('./Routes/accessoriesRoutes');
+const accessoriesRoutes = require('../Routes/accessoriesRoutes');
 const saleRoutes = require('../Routes/saleRoutes');
 
 const cors = require('cors');
