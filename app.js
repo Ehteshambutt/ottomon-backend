@@ -80,28 +80,3 @@ app.listen(port, () => {
 
 
 
-
-// ./src/app/mattresses/page.js
-// Module not found: Can't resolve '../../../components/ButtomDrawer'
-
-// https://nextjs.org/docs/messages/module-not-found
-
-// ./src/app/mattresses/page.js
-// Module not found: Can't resolve '../../../components/ProductFilter'
-
-// https://nextjs.org/docs/messages/module-not-found
-
-// ./src/app/mattresses/page.js
-// Module not found: Can't resolve '../../../components/ProductGridSelector'
-
-// https://nextjs.org/docs/messages/module-not-found
-
-// ./src/app/mattresses/page.js
-// Module not found: Can't resolve '../../../components/ProductList'
-
-// https://nextjs.org/docs/messages/module-not-found
-
-// ./src/app/mattresses/page.js
-// Module not found: Can't resolve '../../../components/ProductListMatress'
-
-// https://nextjs.org/docs/messages/module-not-found
