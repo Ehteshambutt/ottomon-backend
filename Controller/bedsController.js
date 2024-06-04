@@ -1,5 +1,5 @@
 // controllers/bedsController.js
-const mysql = require('mysql');
+const mysql = require('mysql2');
 require('dotenv').config();
 
 // Set up database connection
@@ -18,7 +18,7 @@ db.connect((err) => {
 });
 
 exports.getAllBeds = (req, res) => {
-  const sql = 'SELECT * FROM Beds';
+  const sql = 'SELECT * FROM beds';
   db.query(sql, (err, results) => {
     if (err) throw err;
     res.json(results);
@@ -26,7 +26,7 @@ exports.getAllBeds = (req, res) => {
 };
  
 exports.getBedById = (req, res) => {
-  const sql = 'SELECT * FROM Beds WHERE id = ?';
+  const sql = 'SELECT * FROM beds WHERE id = ?';
   db.query(sql, [req.params.id], (err, result) => {
     if (err) throw err;
     res.json(result);
@@ -35,7 +35,7 @@ exports.getBedById = (req, res) => {
 
 exports.createBed = (req, res) => {
   const newBed = req.body;
-  const sql = 'INSERT INTO Beds SET ?';
+  const sql = 'INSERT INTO beds SET ?';
   db.query(sql, newBed, (err, result) => {
     if (err) throw err;
     res.json({ id: result.insertId, ...newBed });
@@ -44,7 +44,7 @@ exports.createBed = (req, res) => {
 
 exports.updateBed = (req, res) => {
   const updatedBed = req.body;
-  const sql = 'UPDATE Beds SET ? WHERE id = ?';
+  const sql = 'UPDATE beds SET ? WHERE id = ?';
   db.query(sql, [updatedBed, req.params.id], (err, result) => {
     if (err) throw err;
     res.json({ id: req.params.id, ...updatedBed });
@@ -52,7 +52,7 @@ exports.updateBed = (req, res) => {
 };
 
 exports.deleteBed = (req, res) => {
-  const sql = 'DELETE FROM Beds WHERE id = ?';
+  const sql = 'DELETE FROM beds WHERE id = ?';
   db.query(sql, [req.params.id], (err, result) => {
     if (err) throw err;
     res.json({ message: 'Bed deleted successfully' });

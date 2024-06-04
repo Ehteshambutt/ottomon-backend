@@ -2,7 +2,7 @@ const db = require('../DBConfig/dbConfig');
 
 // Get all mattresses
 exports.getAllMattresses = (req, res) => {
-    const query = 'SELECT * FROM Mattresses';
+    const query = 'SELECT * FROM mattresses';
     db.query(query, (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -14,7 +14,7 @@ exports.getAllMattresses = (req, res) => {
 // Get a single mattress by ID
 exports.getMattressById = (req, res) => {
     const { id } = req.params;
-    const query = 'SELECT * FROM Mattresses WHERE id = ?';
+    const query = 'SELECT * FROM mattresses WHERE id = ?';
     db.query(query, [id], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -29,7 +29,7 @@ exports.getMattressById = (req, res) => {
 // Create a new mattress
 exports.createMattress = (req, res) => {
     const { name, price, discount, category, size, image, hoverImage, description, firmness,Type  } = req.body;
-    const query = 'INSERT INTO Mattresses (name, price, discount, category, size, image, hoverImage, description, firmness, Type ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
+    const query = 'INSERT INTO mattresses (name, price, discount, category, size, image, hoverImage, description, firmness, Type ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?,?)';
     db.query(query, [name, price, discount, category, size, image, hoverImage, description, firmness,Type ], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -42,7 +42,7 @@ exports.createMattress = (req, res) => {
 exports.updateMattress = (req, res) => {
     const { id } = req.params;
     const { name, price, discount, category, size, image, hoverImage, description, firmness,Type  } = req.body;
-    const query = 'UPDATE Mattresses SET name = ?, price = ?, discount = ?, category = ?, size = ?, image = ?, hoverImage = ?, description = ?, firmness = ? WHERE id = ?,Type =?';
+    const query = 'UPDATE mattresses SET name = ?, price = ?, discount = ?, category = ?, size = ?, image = ?, hoverImage = ?, description = ?, firmness = ? WHERE id = ?,Type =?';
     db.query(query, [name, price, discount, category, size, image, hoverImage, description, firmness,Type, id], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
@@ -57,7 +57,7 @@ exports.updateMattress = (req, res) => {
 // Delete a mattress by ID
 exports.deleteMattress = (req, res) => {
     const { id } = req.params;
-    const query = 'DELETE FROM Mattresses WHERE id = ?';
+    const query = 'DELETE FROM mattresses WHERE id = ?';
     db.query(query, [id], (err, results) => {
         if (err) {
             return res.status(500).json({ error: err.message });
