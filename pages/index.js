@@ -29,6 +29,9 @@ app.use(cors({
 
 // Define base URL prefix
 const baseURL = '/api/v1';
+app.use(baseURL + '/', (req,res)=>{
+  res.send('app is running')
+});
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 // Use base URL prefix for routes
 app.use(baseURL + '/products', productRoutes);
